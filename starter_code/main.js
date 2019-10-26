@@ -11,14 +11,30 @@ function draw() {
   //
   // Iteration 1: road drawing
   //
+  ctx.fillStyle="green";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="grey";
+  ctx.fillRect(30,0,W-60,H);
+  ctx.fillStyle="white";
+  ctx.fillRect(50,0,W-100,H);
+  ctx.fillStyle="grey";
+  ctx.fillRect(70,0,W-140,H);
+  
+  ctx.beginPath();
+  ctx.moveTo(500,0);
+  ctx.lineWidth = 10;
+  ctx.strokeStyle="white";
+  ctx.setLineDash([40, 30]);
+  ctx.lineTo(500,H); // du départ à la fin 
+  ctx.stroke();
+
 
   // TODO
 
   //
   // Iteration 2: car drawing
   //
-
-  // TODO
+  car.draw();
 
   //
   // Iteration #4: obstacles
@@ -42,9 +58,17 @@ function draw() {
 
 document.onkeydown = function (e) {
   if (!car) return;
+  switch (e.keyCode) {
+    case 37: // left arrow
+      car.moveLeft();
+      break;
+    case 39: // right arrow
+      car.moveRight();
+      break;
+  }
+};
   
-  // TODO
-}
+
 
 let frames = 0;
 function animLoop() {
@@ -58,7 +82,7 @@ function animLoop() {
 }
 
 function startGame() {
-  // TODO
+  car = new Car();
 
   requestAnimationFrame(animLoop);
 }
